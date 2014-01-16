@@ -77,6 +77,10 @@ module Statsd
           require 'statsd/graphite' 
         end
       
+        if options[:zabbix]
+          require 'statsd/zabbix'
+        end
+
         # Start the server
         EventMachine::run do
           EventMachine::open_datagram_socket(config['bind'], config['port'], Statsd::Server)  
@@ -100,6 +104,14 @@ module Statsd
               end     
             end
           
+            if options[:zabbix]
+              EventMachine.connect config['zabbix_host'], config['zabbix_port'], Statsd::Zabbix do |conn|
+                conn.counters = counters
+                conn.flush_interval = config['flush_interval']
+                conn.flush_stats
+              end
+            end
+
           end
 
         end

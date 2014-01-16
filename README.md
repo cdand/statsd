@@ -1,7 +1,7 @@
 StatsD
 ======
 
-A network daemon for aggregating statistics (counters and timers), rolling them up, then sending them to [graphite][graphite] or [mongodb][mongodb].
+A network daemon for aggregating statistics (counters and timers), rolling them up, then sending them to [graphite][graphite], [mongodb][mongodb] or Zabbix.
 
 
 ### Installation
@@ -28,6 +28,10 @@ Example config.yml
     # Mongo
     mongo_host: localhost
     mongo_database: statsdb
+
+    # Zabbix
+    zabbix_host: 127.0.0.1
+    zabbix_port: 10051
 
     # If you change these, you need to delete the capped collections yourself!
     # Average mongo record size is 152 bytes
@@ -60,6 +64,9 @@ Flush to Graphite (default):
 
 Flush and aggregate to MongoDB:
     statsd -c config.yml -m
+
+Flush and aggregate to Zabbix:
+    statsd -c config.yml -z
 
 ### Client    
 In your client code:

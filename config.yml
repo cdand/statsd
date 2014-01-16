@@ -13,6 +13,10 @@ graphite_port: 2003
 mongo_host: localhost
 mongo_database: statsdb
 
+# Zabbix
+zabbix_host: 127.0.0.1
+zabbix_port: 10051
+
 # If you change these, you need to delete the capped collections yourself!
 # Average mongo record size is 152 bytes
 # 10s or 1min data is transient so we'll use MongoDB's capped collections. These collections are fixed in size.
